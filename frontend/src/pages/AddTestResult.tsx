@@ -77,12 +77,6 @@ const AddTestResult = ({ onAdd }: { onAdd: () => void }) => {
           required
         />
 
-        {/* ✅ Status dropdown */}
-        <select name="status" value={form.status} onChange={handleChange}>
-          <option value="Safe">Safe</option>
-          <option value="Unsafe">Unsafe</option>
-        </select>
-
         <input
           type="date"
           name="test_date"

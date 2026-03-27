@@ -16,7 +16,22 @@
     outline-offset: 2px;
   }
 }
+button {
+  margin: 5px;
+  padding: 8px 12px;
+  border-radius: 5px;
+  border: none;
+  background-color: #3498db;
+  color: white;
+  cursor: pointer;
+}
 
+input {
+  display: block;
+  margin: 10px 0;
+  padding: 8px;
+  width: 200px;
+}
 .hero {
   position: relative;
 
@@ -182,3 +197,4 @@
     border-right-color: var(--border);
   }
 }
+

@@ -3,30 +3,40 @@ import Alerts from "./Alerts";
 import QueryPlan from "./QueryPlan";
 import AddTestResult from "./AddTestResult";
 
-const Dashboard = () => {
+
+const Dashboard = ({
+  role,
+  user,
+  logout,
+  goBack
+}: {
+  role: string;
+  user: string;
+  logout: () => void;
+  goBack: () => void;
+}) => {
   return (
     <div className="container">
-      <h1>Water Quality Monitoring Dashboard</h1>
-
-      <div className="card">
-        <TestResults />
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <button onClick={goBack}>⬅ Change Role</button>
+        <button onClick={logout}>Logout</button>
       </div>
 
-      <div className="card">
-  <AddTestResult onAdd={function (): void {
-                  throw new Error("Function not implemented.");
-              } } />
-</div>
+      <h1>Welcome {user} ({role})</h1>
 
-      <div className="card">
-        <Alerts />
-      </div>
+      {/* Role-based rendering */}
+      <TestResults />
 
-      <div className="card">
-        <QueryPlan />
-      </div>
+      {(role === "admin" || role === "lab_technician") && (
+        <AddTestResult onAdd={() => window.location.reload()} />
+      )}
+
+      {role === "admin" && <Alerts />}
+      {role === "admin" && <QueryPlan />}
     </div>
   );
 };
 
 export default Dashboard;
+
+      

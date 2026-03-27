@@ -72,6 +72,49 @@ h2 {
   margin-bottom: 20px;
 }
 
+/* ===== BUTTONS ===== */
+button {
+  background: linear-gradient(135deg, #78b0f0, #357abd);
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  margin: 6px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Hover effect */
+button:hover {
+  background: linear-gradient(135deg, #357abd, #2c5fa3);
+  transform: translateY(-1px);
+}
+
+/* Click effect */
+button:active {
+  transform: scale(0.97);
+}
+
+/* Secondary button (Back / Cancel) */
+button.secondary {
+  background: #ecf0f1;
+  color: #2c3e50;
+}
+
+button.secondary:hover {
+  background: #d0d7de;
+}
+
+/* Danger button (Logout) */
+button.danger {
+  background: #e74c3c;
+}
+
+button.danger:hover {
+  background: #c0392b;
+}
 /* Table */
 table {
   width: 100%;
@@ -109,4 +152,34 @@ td {
   font-family: monospace;
   font-size: 14px;
   overflow-x: auto;
+}
+.container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Card look */
+.card {
+  background: #ffffff;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(147, 239, 130, 0.08);
+}
+input, select {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  margin: 10px auto;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+input:focus {
+  outline: none;
+  border-color: #3498db;
 }
