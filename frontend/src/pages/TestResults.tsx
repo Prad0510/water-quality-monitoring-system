@@ -24,20 +24,19 @@ const TestResults = () => {
       <table border={1}>
         <thead>
           <tr>
-            <th>Result ID</th>
-            <th>Sample ID</th>
-            <th>Status</th>
+            {data.length > 0 &&
+              Object.keys(data[0]).map((key) => (
+                <th key={key}>{key}</th>
+            ))}
           </tr>
         </thead>
 
         <tbody>
-          {data.map((row) => (
-            <tr key={row.result_id}>
-              <td>{row.result_id}</td>
-              <td>{row.sample_id}</td>
-              <td className={row.status === "Safe" ? "safe" : "unsafe"}>
-                {row.status}
-              </td>
+          {data.map((row,i) => (
+            <tr key={i}>
+              {Object.values(row).map((value,j) =>(
+                <td key={j}>{value}</td>
+              ))}
             </tr>
           ))}
         </tbody>

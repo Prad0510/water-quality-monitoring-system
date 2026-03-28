@@ -13,13 +13,12 @@ function App() {
   }
 
   // Step 2: Login / Signup
-  if (!user) {
+  if (role === "public") {
     return (
       <Dashboard
         role={role}
         user="Guest"
         logout={() => setRole(null)}
-        goBack={() => setRole(null)}
       />
     );
   }
@@ -27,10 +26,9 @@ function App() {
   // Step 3: Dashboard
   if(!user){
     return (
-    <Dashboard
+    <AuthPage
       role={role}
-      user={user}
-      logout={() => setUser(null)}
+      setUser={setUser}
       goBack={() => setRole(null)}
     />
   );
@@ -40,7 +38,6 @@ function App() {
       role={role}
       user={user}
       logout={() => setUser(null)}
-      goBack={() => setRole(null)}
     />
   )
 }

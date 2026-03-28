@@ -7,15 +7,21 @@ testresult_bp = Blueprint('testresult', __name__)
 def get_testresults():
 
         role = request.headers.get("role")
-        
+        print("ROLE RECEIVED:", role)
         conn = get_connection()
         cur = conn.cursor()
         
         if role == "public":
-            cur.execute("SELECT * FROM testresult WHERE status = 'Safe';")
+            print("ONLY SAFE DATA")
+            cur.execute("""SELECT result_id, sample_id, value, status, test_date FROM testresult WHERE status = 'Safe';""")
+        elif role =="admin":
+            print("FULL ACCESS")
+            cur.execute("""SELECT * FROM testresult;""")
+        elif role=="lab_technician":
+            print("LAB TECHNICIAN ACCESS")
+            cur.execute("""SELECT result_id, sample_id, value, status, test_date FROM testresult;""")
         else:
-            cur.execute("SELECT * FROM testresult;")
-
+            return {"error": "Unauthorized"}, 403
         rows = cur.fetchall()
         
         columns = [desc[0] for desc in cur.description]

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import API from "../api/api";
 
 const AuthPage = ({
   role,
@@ -17,25 +18,50 @@ const AuthPage = ({
   const ADMIN_PASS = "admin123";
 
   const handleSubmit = () => {
+    // 🔐 Admin (hardcoded)
     if (role === "admin") {
       if (username === ADMIN_USER && password === ADMIN_PASS) {
+        localStorage.setItem("role", role);
+        localStorage.setItem("user", username);
         setUser(username);
       } else {
         alert("Invalid Admin credentials");
       }
-    } else {
-      if (isSignup) {
-        localStorage.setItem(username, password);
-        alert("Signup successful");
-        setIsSignup(false);
-      } else {
-        const storedPass = localStorage.getItem(username);
-        if (storedPass === password) {
+      return;
+    }
+
+    // 📝 SIGNUP (store in DB)
+    if (isSignup) {
+      API.post("/signup", {
+        username,
+        password,
+        role
+      })
+        .then(() => {
+          alert("Signup successful");
+          setIsSignup(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          alert("Signup failed");
+        });
+    }
+
+    // 🔑 LOGIN (check from DB)
+    else {
+      API.post("/login", {
+        username,
+        password,
+        role
+      })
+        .then(() => {
+          localStorage.setItem("role", role);
+          localStorage.setItem("user", username);
           setUser(username);
-        } else {
+        })
+        .catch(() => {
           alert("Invalid credentials");
-        }
-      }
+        });
     }
   };
 
@@ -47,12 +73,14 @@ const AuthPage = ({
 
       <input
         placeholder="Username"
+        value={username}
         onChange={(e) => setUsername(e.target.value)}
       />
 
       <input
         type="password"
         placeholder="Password"
+        value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
 
@@ -60,6 +88,7 @@ const AuthPage = ({
         {isSignup ? "Signup" : "Login"}
       </button>
 
+      {/* Toggle only for technician (admin fixed) */}
       {role !== "admin" && (
         <p>
           {isSignup ? "Already have an account?" : "New user?"}

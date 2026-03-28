@@ -8,17 +8,14 @@ const Dashboard = ({
   role,
   user,
   logout,
-  goBack
 }: {
   role: string;
   user: string;
   logout: () => void;
-  goBack: () => void;
 }) => {
   return (
     <div className="container">
       <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <button onClick={goBack}>⬅ Change Role</button>
         <button onClick={logout}>Logout</button>
       </div>
 
