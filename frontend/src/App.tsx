@@ -1,45 +1,51 @@
-import { useState } from "react";
-import Dashboard from "./pages/Dashboard";
-import RoleSelector from "./pages/RoleSelector";
+import { useState, useEffect } from "react";
+import AppLayout from "./components/AppLayout";
 import AuthPage from "./pages/AuthPage";
 
 function App() {
-  const [role, setRole] = useState<string | null>(null);
-  const [user, setUser] = useState<string | null>(null);
+  // Initialize state from localStorage to keep user logged in on refresh
+  const [role, setRole] = useState<string | null>(localStorage.getItem("role"));
+  const [user, setUser] = useState<string | null>(localStorage.getItem("user"));
 
-  // Step 1: Select Role
-  if (!role) {
-    return <RoleSelector setRole={setRole} />;
-  }
+  // Handle Logout
+  const logout = () => {
+    localStorage.clear(); // Clears role and user from browser memory
+    setRole(null);
+    setUser(null);
+  };
 
-  // Step 2: Login / Signup
-  if (role === "public") {
+  // ---------------------------------------------------------
+  // Staff Authentication
+  // If a role (Admin/Lab Tech) is selected but no user is logged in.
+  // ---------------------------------------------------------
+  if (role && !user) {
     return (
-      <Dashboard
+      <AuthPage
         role={role}
-        user="Guest"
-        logout={() => setRole(null)}
+        setUser={(username) => {
+          localStorage.setItem("user", username);
+          setUser(username);
+        }}
+        goBack={() => {
+          localStorage.removeItem("role");
+          setRole(null);
+        }}
       />
     );
   }
 
-  // Step 3: Dashboard
-  if(!user){
-    return (
-    <AuthPage
+  // ---------------------------------------------------------
+  // Global Enterprise AppLayout View
+  // Handles Public and Authenticated Layouts structurally
+  // ---------------------------------------------------------
+  return (
+    <AppLayout
       role={role}
-      setUser={setUser}
-      goBack={() => setRole(null)}
+      setRole={setRole}
+      user={user}
+      logout={logout}
     />
   );
-}
-  return(
-    <Dashboard
-      role={role}
-      user={user}
-      logout={() => setUser(null)}
-    />
-  )
 }
 
 export default App;

@@ -1,0 +1,52 @@
+<WaterMonitoringSystem>
+    <Station id="ST001">
+        <Location>Central Reservoir</Location>
+        <Technician>Dr. Sarah Chen</Technician>
+        <Schedule date="2026-04-10" time="09:00"/>
+        <Metrics>
+            <pH>7.2</pH>
+            <Turbidity unit="NTU">1.5</Turbidity>
+            <Status>Safe</Status>
+        </Metrics>
+    </Station>
+    <Station id="ST002">
+        <Location>Industrial District Well</Location>
+        <Technician>Mark Rodriguez</Technician>
+        <Schedule date="2026-04-12" time="14:30"/>
+        <Metrics>
+            <pH>6.1</pH>
+            <Turbidity unit="NTU">4.8</Turbidity>
+            <Status>Warning</Status>
+        </Metrics>
+    </Station>
+    <Station id="ST003">
+        <Location>North River Branch</Location>
+        <Technician>Dr. Sarah Chen</Technician>
+        <Schedule date="2026-04-10" time="11:00"/>
+        <Metrics>
+            <pH>8.4</pH>
+            <Turbidity unit="NTU">2.1</Turbidity>
+            <Status>Safe</Status>
+        </Metrics>
+    </Station>
+    <Station id="ST004">
+        <Location>East Coast Pipeline</Location>
+        <Technician>Amina Okoro</Technician>
+        <Schedule date="2026-04-15" time="08:00"/>
+        <Metrics>
+            <pH>7.5</pH>
+            <Turbidity unit="NTU">0.8</Turbidity>
+            <Status>Safe</Status>
+        </Metrics>
+    </Station>
+    <Station id="ST005">
+        <Location>South Wetland Basin</Location>
+        <Technician>Mark Rodriguez</Technician>
+        <Schedule date="2026-04-20" time="10:00"/>
+        <Metrics>
+            <pH>5.5</pH>
+            <Turbidity unit="NTU">12.5</Turbidity>
+            <Status>Critical</Status>
+        </Metrics>
+    </Station>
+</WaterMonitoringSystem>
